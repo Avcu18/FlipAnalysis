@@ -19,7 +19,7 @@ WebDriverWait(driver, 10).until(
 # tracking durch unique set
 element_ids = set()
 background_colors = []
-
+counter = 0
 
 #logik geändert, damit es dauerhaft läuft + wir im array immer das neuste element haben 
 try:
@@ -27,8 +27,14 @@ try:
         new_elements = driver.find_elements(By.CSS_SELECTOR, '.tss-1kk5vra-root, .tss-13lu5i1-root, .tss-1epd446-root, .tss-on00c-root')
        # print(new_elements)
         for element in new_elements:
-            if element.id not in element_ids:
+            if element.id not in element_ids: #.id greift auf intere id des elements zu (div in dem fall)
                 print("Neues Element gefunden.")
+                  
+                counter += 1
+                if counter % 10 == 0:
+                    print("Aktueller Counter-Wert: ", counter)
+
+
                 element_ids.add(element.id)
                 
                 # Extrahiere die Hintergrundfarbe für jedes neue Element
